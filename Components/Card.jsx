@@ -1,37 +1,71 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Card({ title, price, image }) {
+export default function Card({id, title, price, image, desc }) { 
+  const navigation = useNavigation();
   return (
     <View style={styles.card}>
-      <Image source={{ uri: image }} style={styles.image} />
+      <Image source={image} style={styles.productImage} />
+
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.price}>${price}</Text>
+      <Text style={styles.text}>{desc}</Text>
+      
+      <TouchableOpacity style={styles.orderButton}
+      onPress={() => navigation.navigate('Order', { id, title, price, image, description: desc })}>
+        <Text style={styles.orderButtonText}>Order Now</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    padding: 10,
+    padding: 15,
     margin: 10,
-    borderRadius: 8,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#fff',
     alignItems: 'center',
-    flex: 1, 
-    maxWidth: '45%', 
+    borderRadius: 10,
+    width: '90%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
   },
-  image: {
-    width: '100%', 
-    height: 100,
-    resizeMode: 'contain',
+  productImage: {
+    width: '100%',
+    height: 120,
+    resizeMode: 'cover',
+    borderRadius: 8,
   },
   title: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
+    color: '#333',
+    marginVertical: 8,
+    textAlign: 'center',
+  },
+  text:{
+    fontSize:15,
+    color: '#333',
+    textAlign:'center',
+    marginBottom:8
   },
   price: {
-    fontSize: 14,
-    color: '#555',
+    fontSize: 16,
+    color: '#888',
+    marginBottom: 10,
+  },
+  orderButton: {
+    backgroundColor: 'rgb(10, 12, 32)',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  orderButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });

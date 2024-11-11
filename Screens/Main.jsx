@@ -1,41 +1,64 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, ImageBackground, TouchableOpacity } from 'react-native';
 
 export default function Main({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.welcomeText}>Welcome to My E-commerce App</Text>
-      
-      <View style={styles.buttonContainer}>
-        <Button title="Login" onPress={() => navigation.navigate('Login')} color="#560CCE" />
+    <ImageBackground source={require('../Images/background.jpg')} style={styles.backgroundImage}>
+      <View style={styles.container}>
+        <Image source={require('../Images/logo.png')} style={styles.logo} />
+        <Text style={styles.welcomeText}>Deliver your Favourite Food</Text>
+        
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Signup')}>
+          <Text style={styles.buttonText}>Signup</Text>
+        </TouchableOpacity>
       </View>
-      
-      <View style={styles.buttonContainer}>
-        <Button title="Signup" onPress={() => navigation.navigate('Signup')} color="#560CCE" />
-      </View>
-    </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+   
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#f8f8ff', 
+ 
+  },
+  logo: {
+    width: 100,
+    height: 100, 
+    marginBottom: 20,
   },
   welcomeText: {
-    fontSize: 30,
+    fontSize: 26,
     fontWeight: 'bold',
-    color: '#560CCE',
+    color: '#ffff',
     marginBottom: 40,
     textAlign: 'center',
+     fontFamily:"cursive"
   },
-  buttonContainer: {
-    width: '80%', 
-    marginVertical: 10, 
+  button: {
+    backgroundColor: '#130718',
+    paddingVertical: 15,
+    paddingHorizontal: 25,
     borderRadius: 10,
-    overflow: 'hidden', 
+    width: '80%',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    fontFamily:"san-serif"
   },
 });
